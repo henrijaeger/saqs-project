@@ -1,4 +1,4 @@
-package de.thb.iceparticles.controller.dto;
+package de.thb.iceparticles.presentation.model;
 
 import lombok.Builder;
 import lombok.Data;

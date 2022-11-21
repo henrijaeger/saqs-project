@@ -1,12 +1,14 @@
 package de.thb.iceparticles;
 
-import de.thb.iceparticles.view.GuiFrame;
+import de.thb.iceparticles.presentation.view.GuiFrame;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.swing.*;
 
+@EnableScheduling
 @SpringBootApplication
 public class IceparticlesApplication {
 
