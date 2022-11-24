@@ -9,6 +9,8 @@ public interface IViewController {
 
     void addStation(Station station);
 
+    void selectStation(int index);
+
     ListModel<ListStationDto> getStationModel();
 
 }

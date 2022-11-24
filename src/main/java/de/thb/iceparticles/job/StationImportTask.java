@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.Random;
 
 @Component
@@ -23,8 +24,13 @@ public class StationImportTask {
     // Alle 2min eine neue Station
     @Scheduled(cron = "*/2 * * * * *")
     public void addRandom() {
-        if (stationService.getStations().size() < 50) {
-            stationService.createStation(StationCreateDto.builder().id(genUnusedId()).build());
+        if (stationService.getStations().size() < 10) {
+            stationService.createStation(StationCreateDto.builder()
+                    .id(genUnusedId())
+                    .localDate(LocalDate.of(2000 + random.nextInt(22), 1 + random.nextInt(11), 1 + random.nextInt(27)))
+                    .target(random.nextInt(100))
+                    .value(random.nextInt(100))
+                    .build());
         }
     }
 

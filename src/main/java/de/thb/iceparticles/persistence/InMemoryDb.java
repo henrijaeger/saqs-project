@@ -3,22 +3,23 @@ package de.thb.iceparticles.persistence;
 import de.thb.iceparticles.persistence.domain.Station;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class InMemoryDb implements IRepository {
 
-    private final List<Station> stations = new ArrayList<>();
+    private final Set<Station> stations = new LinkedHashSet<>();
 
-    public InMemoryDb() {
-        stations.add(Station.builder().id("mock1").build());
-        stations.add(Station.builder().id("mock2").build());
-    }
+    public InMemoryDb() { }
 
     @Override
     public List<Station> findAll() {
-        return stations;
+        return new ArrayList<>(stations);
+    }
+
+    @Override
+    public Optional<Station> findById(String id) {
+        return stations.stream().filter(s -> Objects.equals(s.getId(), id)).findFirst();
     }
 
     @Override
