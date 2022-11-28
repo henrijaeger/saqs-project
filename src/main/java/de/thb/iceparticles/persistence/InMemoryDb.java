@@ -10,7 +10,11 @@ public class InMemoryDb implements IRepository {
 
     private final Set<Station> stations = new LinkedHashSet<>();
 
-    public InMemoryDb() { }
+    public InMemoryDb() {
+        this.stations.add(Station.builder().id("mock-1").build());
+        this.stations.add(Station.builder().id("mock-2").build());
+        this.stations.add(Station.builder().id("mock-3").build());
+    }
 
     @Override
     public List<Station> findAll() {

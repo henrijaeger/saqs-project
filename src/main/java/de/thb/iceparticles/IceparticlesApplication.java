@@ -16,7 +16,7 @@ public class IceparticlesApplication {
 		ConfigurableApplicationContext ctx = new SpringApplicationBuilder(IceparticlesApplication.class)
 				.headless(false).run(args);
 
-		SwingUtilities.invokeLater(() -> ctx.getBean(GuiFrame.class).setVisible(true));
+		//SwingUtilities.invokeLater(() -> ctx.getBean(GuiFrame.class).setVisible(true));
 	}
 
 }

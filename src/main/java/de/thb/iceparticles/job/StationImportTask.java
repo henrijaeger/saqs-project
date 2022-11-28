@@ -22,9 +22,10 @@ public class StationImportTask {
     }
 
     // Alle 2min eine neue Station
-    @Scheduled(cron = "*/2 * * * * *")
+    @Scheduled(cron = "*/10 * * * * *")
+    //@Scheduled(cron = "-")
     public void addRandom() {
-        if (stationService.getStations().size() < 10) {
+        if (stationService.getStations().size() < 100) {
             stationService.createStation(StationCreateDto.builder()
                     .id(genUnusedId())
                     .localDate(LocalDate.of(2000 + random.nextInt(22), 1 + random.nextInt(11), 1 + random.nextInt(27)))

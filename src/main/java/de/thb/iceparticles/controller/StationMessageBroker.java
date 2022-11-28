@@ -1,0 +1,25 @@
+package de.thb.iceparticles.controller;
+
+import de.thb.iceparticles.persistence.domain.Station;
+import de.thb.iceparticles.service.observer.IStationObserver;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class StationMessageBroker implements IStationObserver {
+
+    private static final String CHANNEL = "/ws/new-station";
+
+    private final MessageBroker messageBroker;
+
+    @Autowired
+    public StationMessageBroker(MessageBroker messageBroker) {
+        this.messageBroker = messageBroker;
+    }
+
+    @Override
+    public void onNewStation(Station station) {
+        messageBroker.broadcast(CHANNEL, station);
+    }
+
+}
