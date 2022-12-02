@@ -49,7 +49,7 @@ public class StationImportTask {
     }
 
     private String genId() {
-        final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYK0123456789";
+        final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         final StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < 6; i++) {
