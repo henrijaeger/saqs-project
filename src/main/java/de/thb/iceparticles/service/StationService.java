@@ -4,13 +4,17 @@ import de.thb.iceparticles.persistence.IRepository;
 import de.thb.iceparticles.persistence.domain.Station;
 import de.thb.iceparticles.service.domain.StationCreateDto;
 import de.thb.iceparticles.service.domain.StationUpdateDto;
+import de.thb.iceparticles.service.domain.exc.InvalidValueException;
+import de.thb.iceparticles.service.domain.exc.StationNotFoundException;
 import de.thb.iceparticles.service.observer.IStationObserver;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class StationService implements IStationService {
 
@@ -38,19 +42,27 @@ public class StationService implements IStationService {
     }
 
     @Override
-    public Station patchStation(String id, StationUpdateDto dto) {
+    public Station patchStation(String id, StationUpdateDto dto) throws InvalidValueException, StationNotFoundException {
         Optional<Station> os = db.findById(id);
 
         if (os.isPresent()) {
             Station station = os.get();
 
-            if (dto.getTarget() != null) {
-                station.setTarget(dto.getTarget());
+            if (dto.getValue() != null) {
+                if (dto.getValue() < 0 || dto.getValue() > 100) {
+                    throw new InvalidValueException("value", "may not exceed [0, 100]", dto.getValue());
+                }
+
+                station.setValue(dto.getValue());
+            }
+
+            if (dto.getDate() != null) {
+                station.setDate(dto.getDate());
             }
 
             return db.save(station);
         } else {
-            throw new RuntimeException("No station found for id '" + id + "'");
+            throw new StationNotFoundException(id);
         }
     }
 
