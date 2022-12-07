@@ -7,7 +7,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @EqualsAndHashCode(callSuper = true)
-public class ErrorObject extends Response<String> {
+public class ErrorObject<T> extends Response<T> {
 
     String message;
 

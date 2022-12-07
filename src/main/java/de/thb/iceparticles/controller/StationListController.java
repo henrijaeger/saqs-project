@@ -6,12 +6,11 @@ import de.thb.iceparticles.service.IStationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@Controller
+@RestController
 public class StationListController {
 
     private final IStationService stationService;
@@ -21,8 +20,7 @@ public class StationListController {
         this.stationService = stationService;
     }
 
-    @MessageMapping("/list")
-    @SendTo("/ws/station-list")
+    @GetMapping(value = "/list", produces = "application/json")
     public String getStations() {
         log.debug("[Get] List of stations");
 

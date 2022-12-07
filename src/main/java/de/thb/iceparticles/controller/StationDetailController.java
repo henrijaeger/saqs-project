@@ -11,44 +11,48 @@ import de.thb.iceparticles.service.domain.exc.StationNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
-@Controller
+@RestController
 public class StationDetailController {
 
+    private static final String CHANNEL = "/ws/station-update";
+
     private final IStationService stationService;
+    private final MessageBroker messageBroker;
 
     @Autowired
-    public StationDetailController(IStationService stationService) {
+    public StationDetailController(IStationService stationService, MessageBroker messageBroker) {
         this.stationService = stationService;
+        this.messageBroker = messageBroker;
     }
 
-    @MessageMapping("/detail/{id}")
-    @SendTo("/ws/station-detail")
-    public String updateDetails(@DestinationVariable String id, @Payload String data) {
-        log.debug("[Update] {} : {}", id, data);
+    @PatchMapping("/detail/{id}")
+    public ResponseEntity<Response<Station>> updateDetails(@PathVariable String id, @RequestBody StationUpdateDto update) {
+        Response<Station> response;
 
-        return Util.fromJson(data, StationUpdateDto.class)
-                .map(u -> {
-                    try {
-                        return Response.builder().status(HttpStatus.OK).value(stationService.patchStation(id, u)).build();
-                    } catch (InvalidValueException e) {
-                        log.error("error: {}: {}", id, e.getMessage());
+        log.debug("[Update] {} : {}", id, update);
 
-                        return ErrorObject.builder().status(HttpStatus.BAD_REQUEST).message(e.getMessage()).build();
-                    } catch (StationNotFoundException e) {
-                        log.error("error: {}: {}", id, e.getMessage());
+        try {
+            Station updated = stationService.patchStation(id, update);
+            response = Response.<Station>builder().status(HttpStatus.OK).value(updated).build();
 
-                        return ErrorObject.builder().status(HttpStatus.NOT_FOUND).message(e.getMessage()).build();
-                    }
-                })
-                .map(Util::toJson)
-                .orElse(Util.toJson(ErrorObject.builder().status(HttpStatus.BAD_REQUEST).message("Invalid request parameters.").build()));
+            messageBroker.broadcast(CHANNEL, updated);
+        } catch (InvalidValueException e) {
+            log.error("error: {}: {}", id, e.getMessage());
+
+            response = ErrorObject.<Station>builder().status(HttpStatus.BAD_REQUEST).message(e.getMessage()).build();
+        } catch (StationNotFoundException e) {
+            log.error("error: {}: {}", id, e.getMessage());
+
+            response = ErrorObject.<Station>builder().status(HttpStatus.NOT_FOUND).message(e.getMessage()).build();
+        }
+
+        return ResponseEntity.status(response.getStatus()).body(response);
     }
 
 
