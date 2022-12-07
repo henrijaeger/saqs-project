@@ -38,8 +38,12 @@ public class StationDetailController {
                     try {
                         return Response.builder().status(HttpStatus.OK).value(stationService.patchStation(id, u)).build();
                     } catch (InvalidValueException e) {
+                        log.error("error: {}: {}", id, e.getMessage());
+
                         return ErrorObject.builder().status(HttpStatus.BAD_REQUEST).message(e.getMessage()).build();
                     } catch (StationNotFoundException e) {
+                        log.error("error: {}: {}", id, e.getMessage());
+
                         return ErrorObject.builder().status(HttpStatus.NOT_FOUND).message(e.getMessage()).build();
                     }
                 })

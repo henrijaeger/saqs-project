@@ -1,4 +1,4 @@
-package de.thb.iceparticles.job;
+package de.thb.iceparticles.service.job;
 
 import de.thb.iceparticles.service.IStationService;
 import de.thb.iceparticles.service.domain.StationCreateDto;

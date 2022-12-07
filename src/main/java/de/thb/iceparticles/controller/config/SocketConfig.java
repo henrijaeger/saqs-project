@@ -1,4 +1,4 @@
-package de.thb.iceparticles.config;
+package de.thb.iceparticles.controller.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
