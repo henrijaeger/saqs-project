@@ -8,7 +8,7 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MessageBroker {
+public class MessageBroker implements IMessageBroker {
 
     private final SimpMessagingTemplate template;
 

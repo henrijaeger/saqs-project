@@ -10,10 +10,10 @@ public class StationMessageBroker implements IStationObserver {
 
     private static final String CHANNEL = "/ws/new-station";
 
-    private final MessageBroker messageBroker;
+    private final IMessageBroker messageBroker;
 
     @Autowired
-    public StationMessageBroker(MessageBroker messageBroker) {
+    public StationMessageBroker(IMessageBroker messageBroker) {
         this.messageBroker = messageBroker;
     }
 

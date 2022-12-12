@@ -2,6 +2,9 @@ package de.thb.iceparticles.service.job;
 
 import de.thb.iceparticles.service.IStationService;
 import de.thb.iceparticles.service.domain.StationCreateDto;
+import de.thb.iceparticles.service.domain.exc.InvalidValueException;
+import de.thb.iceparticles.service.domain.exc.StationAlreadyExistsExceptions;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.Random;
 
+@Slf4j
 @Component
 public class StationImportTask {
 
@@ -26,12 +30,16 @@ public class StationImportTask {
     //@Scheduled(cron = "-")
     public void addRandom() {
         if (stationService.getStations().size() < 100) {
-            stationService.createStation(StationCreateDto.builder()
-                    .id(genUnusedId())
-                    .localDate(LocalDate.of(2000 + random.nextInt(22), 1 + random.nextInt(11), 1 + random.nextInt(27)))
-                    .target(random.nextInt(100))
-                    .value(random.nextInt(100))
-                    .build());
+            try {
+                stationService.createStation(StationCreateDto.builder()
+                        .id(genUnusedId())
+                        .localDate(LocalDate.of(2000 + random.nextInt(22), 1 + random.nextInt(11), 1 + random.nextInt(27)))
+                        .target(random.nextInt(100))
+                        .value(random.nextInt(100))
+                        .build());
+            } catch (RuntimeException | InvalidValueException | StationAlreadyExistsExceptions e) {
+                log.error("Could not add another station.", e);
+            }
         }
     }
 

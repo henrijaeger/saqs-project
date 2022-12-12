@@ -23,10 +23,10 @@ public class StationDetailController {
     private static final String CHANNEL = "/ws/station-update";
 
     private final IStationService stationService;
-    private final MessageBroker messageBroker;
+    private final IMessageBroker messageBroker;
 
     @Autowired
-    public StationDetailController(IStationService stationService, MessageBroker messageBroker) {
+    public StationDetailController(IStationService stationService, IMessageBroker messageBroker) {
         this.stationService = stationService;
         this.messageBroker = messageBroker;
     }
@@ -54,6 +54,5 @@ public class StationDetailController {
 
         return ResponseEntity.status(response.getStatus()).body(response);
     }
-
 
 }

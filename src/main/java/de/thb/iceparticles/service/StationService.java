@@ -5,11 +5,13 @@ import de.thb.iceparticles.persistence.domain.Station;
 import de.thb.iceparticles.service.domain.StationCreateDto;
 import de.thb.iceparticles.service.domain.StationUpdateDto;
 import de.thb.iceparticles.service.domain.exc.InvalidValueException;
+import de.thb.iceparticles.service.domain.exc.StationAlreadyExistsExceptions;
 import de.thb.iceparticles.service.domain.exc.StationNotFoundException;
 import de.thb.iceparticles.service.observer.IStationObserver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -33,7 +35,19 @@ public class StationService implements IStationService {
     }
 
     @Override
-    public Station createStation(StationCreateDto dto) {
+    public Station createStation(StationCreateDto dto) throws InvalidValueException, StationAlreadyExistsExceptions {
+        if (!StringUtils.hasText(dto.getId())) {
+            throw new InvalidValueException("id", "may not be empty", dto.getId());
+        }
+
+        if (dto.getValue() < 0 || dto.getValue() > 100) {
+            throw new InvalidValueException("value", "may not exceed [0, 100]", dto.getValue());
+        }
+
+        if (db.findById(dto.getId()).isPresent()) {
+            throw new StationAlreadyExistsExceptions(dto.getId());
+        }
+
         Station station = db.save(Station.builder().id(dto.getId()).date(dto.getLocalDate()).target(dto.getTarget()).value(dto.getValue()).build());
 
         observers.forEach(o -> o.onNewStation(station));
