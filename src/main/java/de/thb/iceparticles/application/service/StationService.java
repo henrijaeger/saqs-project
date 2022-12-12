@@ -1,13 +1,13 @@
-package de.thb.iceparticles.service;
+package de.thb.iceparticles.application.service;
 
+import de.thb.iceparticles.application.service.domain.StationCreateDto;
+import de.thb.iceparticles.application.service.domain.StationUpdateDto;
+import de.thb.iceparticles.application.service.domain.exc.InvalidValueException;
+import de.thb.iceparticles.application.service.domain.exc.StationAlreadyExistsExceptions;
+import de.thb.iceparticles.application.service.domain.exc.StationNotFoundException;
+import de.thb.iceparticles.application.service.observer.IStationObserver;
 import de.thb.iceparticles.persistence.IRepository;
 import de.thb.iceparticles.persistence.domain.Station;
-import de.thb.iceparticles.service.domain.StationCreateDto;
-import de.thb.iceparticles.service.domain.StationUpdateDto;
-import de.thb.iceparticles.service.domain.exc.InvalidValueException;
-import de.thb.iceparticles.service.domain.exc.StationAlreadyExistsExceptions;
-import de.thb.iceparticles.service.domain.exc.StationNotFoundException;
-import de.thb.iceparticles.service.observer.IStationObserver;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

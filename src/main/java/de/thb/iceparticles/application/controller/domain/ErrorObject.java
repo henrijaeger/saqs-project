@@ -1,4 +1,4 @@
-package de.thb.iceparticles.controller.domain;
+package de.thb.iceparticles.application.controller.domain;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

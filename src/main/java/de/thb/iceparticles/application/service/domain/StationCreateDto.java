@@ -1,4 +1,4 @@
-package de.thb.iceparticles.service.domain;
+package de.thb.iceparticles.application.service.domain;
 
 import lombok.Builder;
 import lombok.Data;

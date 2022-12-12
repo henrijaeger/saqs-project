@@ -1,12 +1,12 @@
-package de.thb.iceparticles.controller;
+package de.thb.iceparticles.application.controller;
 
-import de.thb.iceparticles.controller.domain.ErrorObject;
-import de.thb.iceparticles.controller.domain.Response;
+import de.thb.iceparticles.application.controller.domain.ErrorObject;
+import de.thb.iceparticles.application.controller.domain.Response;
 import de.thb.iceparticles.persistence.domain.Station;
-import de.thb.iceparticles.service.IStationService;
-import de.thb.iceparticles.service.domain.StationUpdateDto;
-import de.thb.iceparticles.service.domain.exc.InvalidValueException;
-import de.thb.iceparticles.service.domain.exc.StationNotFoundException;
+import de.thb.iceparticles.application.service.IStationService;
+import de.thb.iceparticles.application.service.domain.StationUpdateDto;
+import de.thb.iceparticles.application.service.domain.exc.InvalidValueException;
+import de.thb.iceparticles.application.service.domain.exc.StationNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

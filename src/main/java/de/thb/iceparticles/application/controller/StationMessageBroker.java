@@ -1,7 +1,7 @@
-package de.thb.iceparticles.controller;
+package de.thb.iceparticles.application.controller;
 
 import de.thb.iceparticles.persistence.domain.Station;
-import de.thb.iceparticles.service.observer.IStationObserver;
+import de.thb.iceparticles.application.service.observer.IStationObserver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

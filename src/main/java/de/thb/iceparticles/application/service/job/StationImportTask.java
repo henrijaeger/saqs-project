@@ -1,9 +1,9 @@
-package de.thb.iceparticles.service.job;
+package de.thb.iceparticles.application.service.job;
 
-import de.thb.iceparticles.service.IStationService;
-import de.thb.iceparticles.service.domain.StationCreateDto;
-import de.thb.iceparticles.service.domain.exc.InvalidValueException;
-import de.thb.iceparticles.service.domain.exc.StationAlreadyExistsExceptions;
+import de.thb.iceparticles.application.service.IStationService;
+import de.thb.iceparticles.application.service.domain.StationCreateDto;
+import de.thb.iceparticles.application.service.domain.exc.InvalidValueException;
+import de.thb.iceparticles.application.service.domain.exc.StationAlreadyExistsExceptions;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;

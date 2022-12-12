@@ -1,4 +1,4 @@
-package de.thb.iceparticles.service.domain.exc;
+package de.thb.iceparticles.application.service.domain.exc;
 
 public class StationAlreadyExistsExceptions extends Exception {
 

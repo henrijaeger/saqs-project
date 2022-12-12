@@ -1,4 +1,4 @@
-package de.thb.iceparticles.service.observer;
+package de.thb.iceparticles.application.service.observer;
 
 import de.thb.iceparticles.persistence.domain.Station;
 

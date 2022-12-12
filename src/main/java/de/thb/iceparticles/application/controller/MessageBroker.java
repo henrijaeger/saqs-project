@@ -1,6 +1,6 @@
-package de.thb.iceparticles.controller;
+package de.thb.iceparticles.application.controller;
 
-import de.thb.iceparticles.controller.domain.Response;
+import de.thb.iceparticles.application.controller.domain.Response;
 import de.thb.iceparticles.crosscut.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

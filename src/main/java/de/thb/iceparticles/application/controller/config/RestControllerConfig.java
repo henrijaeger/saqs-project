@@ -1,4 +1,4 @@
-package de.thb.iceparticles.controller.config;
+package de.thb.iceparticles.application.controller.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

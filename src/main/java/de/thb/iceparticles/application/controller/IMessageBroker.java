@@ -1,4 +1,4 @@
-package de.thb.iceparticles.controller;
+package de.thb.iceparticles.application.controller;
 
 public interface IMessageBroker {
 
