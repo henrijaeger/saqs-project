@@ -1,4 +1,4 @@
-package de.thb.iceparticles.misc;
+package de.thb.iceparticles.crosscut;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;

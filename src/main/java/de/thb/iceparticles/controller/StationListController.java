@@ -1,7 +1,7 @@
 package de.thb.iceparticles.controller;
 
 import de.thb.iceparticles.controller.domain.Response;
-import de.thb.iceparticles.misc.Util;
+import de.thb.iceparticles.crosscut.Util;
 import de.thb.iceparticles.service.IStationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

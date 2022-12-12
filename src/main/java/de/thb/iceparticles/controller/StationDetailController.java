@@ -2,7 +2,6 @@ package de.thb.iceparticles.controller;
 
 import de.thb.iceparticles.controller.domain.ErrorObject;
 import de.thb.iceparticles.controller.domain.Response;
-import de.thb.iceparticles.misc.Util;
 import de.thb.iceparticles.persistence.domain.Station;
 import de.thb.iceparticles.service.IStationService;
 import de.thb.iceparticles.service.domain.StationUpdateDto;
@@ -12,8 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
